@@ -14,8 +14,7 @@ library(readxl)
 library(forcats)
 
 #Load csv
-#spl_df <- read.csv("C:/XXX/XXX/2017-2023-10-Checkouts-SPL-Data.csv")
-spl_df <- read.csv("C:/Users/14221/Desktop/2017-2023-10-Checkouts-SPL-Data.csv/2017-2023-10-Checkouts-SPL-Data.csv")
+spl_df <- read.csv("C:/XXX/XXX/2017-2023-10-Checkouts-SPL-Data.csv")
 
 #Proceed Csv
 spl_df <- spl_df %>% mutate(date = paste0(CheckoutYear, "-", CheckoutMonth,  "-01" ))
