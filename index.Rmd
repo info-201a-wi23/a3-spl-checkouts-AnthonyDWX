@@ -5,82 +5,72 @@ output: html_document
 
 ### Introduction
 
-An introduction of the data and a description of the trends/books/items you are choosing to analyze (and why!)
+The assignment centers around a dataset about the recording of items checked out at least 10 times a month issued by the Seattle Public Library from 2017 to 2023.  
+  
+I would like to see how the digitization and pandemic shape the relationship between people and all kinds of media, and compare the trend of old, physical media and new, digital media. Another question would be to check how the trend of the types of the book (E-book or traditional book) people read has changed, and see how much of those types changed. Media is a important part in people's everyday life. It would be interesting to see if digitization affects people's ways of accepting information, or if people simply follows their old habits and not affected by the pandemic and developing technology. Also, quarantine affected the available types of the media people can borrow, so that can affect maybe the habits that they kept for years. So I also want to know if pandemic force people to find new sources of media to replace the library.
+
 
 ### Summary Information
 
-Write a summary paragraph of findings that includes the 5 values calculated from your summary information R script
+The following is a summary for both the SPL data frames:
+```{r echo=FALSE, include=FALSE}
+source("summary.R")
+```
+`r paste("Spl Summary:\n")`
+`r paste("\n\n", names(spl_summary), ": ", unlist(spl_summary))`
 
-These will likely be calculated using your DPLYR skills, answering questions such as:
-
-- What is the average number of checkouts for each item?
-- What is the month or year with the most/least checkouts for a book that you're interested in?
-- What is the month or year with the most/least checkouts for ebooks?
-- How has the number of print book checkouts changed over time?
-
-Feel free to calculate and report values that you find relevant.
 
 ### The Dataset
 
-- Who collected/published the data?  
-- What are the parameters of the data (dates, number of checkouts, kinds of books, etc.)?
-- How was the data collected or generated?  
-- Why was the data collected?  
-- What, if any, ethical questions do you need to consider when working with this data?  
-- What are possible limitations or problems with this data?   (at least 200 words)
+The data was found on Seattle Public Library:   https://data.seattle.gov/Community/Checkouts-by-Title/tmmm-ytt6  
+  
+Dataset Owner - SPL, Provided by: The Seattle Public Library.  
+  
+This data is documented by Seattle Public Library to track on all of the medias borrowed from the library. All book must be recorded when borrowed from the library, and therefore those records are traced to provide the data of the media in the library.  
+  
+Collection of this data began due to the rules and requirement of The Seattle Public Library.  
+12 Columns: UsageClass,	CheckoutType,	MaterialType,	CheckoutYear,	CheckoutMonth,	Checkouts,	Title,	ISBN,	Creator,	Subjects,	Publisher,	PublicationYear.   
+  
+I find some limitations when I writing the explanation. First, I mentioned that library also become digital, then I wonder if the library also records the check out for a E-book online? I do not find the data set explaining this point. Also, like the FAQ said, some of the subject headings blank which is a problem for this data and this problem is very common in ISBN column. Having blank headings for a subject will make the trend that chart created based on the data lose precise. This becomes especially worse if someone pick one or two author or genre to analyze, so I avoid to pick any of those two variables. For ISBN, ignoring the blank, I see many items hacing multiple ISBN, FAQs does not have the answer so I searched on Google for reason, I assume it is because there exist multiple versions like electronic version, audio version, and paper version, etc. But the data does not tell user which ISBN is assigned to which version, and this may cause confusion for people who want to use ISBN as an index to search for a special version of a book. I think this is another defect for this data set.
 
 
 ### First Trends Over Time Chart
 
-Include a chart. Make sure to describe why you included the chart, and what patterns emerged
+I choose this chart to compare the relationship between the time and the type of media people borrowed from the library. I thought maybe this chart would show the trend of people accepting information through media under both the effect of technology and the pandemic. In fact, I think the chart not only shows the trend of media and the result of the pandemic but also combines those two factors perfectly.  
+  
+First, from the graph, I can see there is a mild decrease per year for physical type media and a huge increase in the digital type of borrowed media before 2020. I have the same feeling that media is becoming more common in digital form on the Internet instead of using physical form. For example, people nowadays tend to listen to music or watch movies on apps like Spotify or Netflix instead of buying CDs, when you want to see news, your first action is to open your phone but not find today's newspaper. This shows the trend of digitizing media.  
+  
+Then after 2020, Covid-19 brought quarantine. Seattle library probably closed during the most serious time. So I can see the data of physical items directly fall down to nearly zero. Then the advantage of digital form shows. Without any decrease, pandemic did not affect digital media, instead, it makes an effort to the digitizing of media. From the data trend after year 2021, we can see the effect pandemic left, physical media rises again, but it can never go back to the original level before the pandemic. Covid shaped people's habits, it boost the trend, and the transfer of the media, changing from physical to digital, which is irreversible.
 
-The first chart that you will create and include will show the trend over time of your variable/topic/interest. Think carefully about what you want to communicate to your user (you may have to find relevant trends in the dataset first!). Here are some requirements to help guide your design:
-
-- Show more than one, but fewer than ~10 trends
-  - For example, two books, or 5 different mediums
-- You must have clear x and y axis labels
-- The chart needs a clear title 
-- You need a legend for your different line colors and a clear - legend title
-In your .Rmd file, make sure to describe why you included the chart, and what patterns emerged
-
-When we say "clear" or "human readable" titles and labels, that means that you should not just display the variable name.
-
-Here's an example of how to run an R script inside an RMarkdown file:
-
-``````{r, echo = FALSE, warning = FALSE, code = readLines("chart1_example.R")}
+```{r, echo = FALSE, warning = FALSE, message = FALSE}
+source("chart1.R")
+p1
 ```
 
 ### Second Trends Over Time Chart
 
-Include a chart. Make sure to describe why you included the chart, and what patterns emerged
+I choose to include the second chart to compare the relation between time and Audio book and E-book. I want to see under the digitizing media, how is the trend of book, as a type and probably the most important type of media, changed over the time.  
+  
+Similarly, E-book is a digital version of book, but in my opinion, audio book book is another type of book since it let people "listen" to a book instead of reading it like book and E-book. Before 2020, both the book, E-book and audio book had the increase trend, and then pandemic came, like the first chart, audio and electrical book kept increase and book had huge decrease, especially the E-book.  
+  
+After pandemic, I noticed a interesting point that E-book actually decreased for a short time. I think it is because people now can go back to library again to borrow physical book, so this cause the decrease of the check out amount of the E-book. I think I understand those people who may cause this trend. E-book is a substitution for them, they may still want to change to their original reading habit. For audio book, although both of those two types are digital, their target user is different. People who "listen" book will kept their habit in pandemic while people who read paper version are forced to change, so that explains why E-book increase and decrease after and audio book kept steady increase.
+  
+Maybe this conclusion is kind of biased since I like physical version when I read books (except textbook) and there are many other ways to get E-book, audio book. But I think based on the chart, at least this is true for those people who still go to library and borrow book.
 
-The second chart that you will create and include will show another trend over time of your variable/topic/interest. Think carefully about what you want to communicate to your user (you may have to find relevant trends in the dataset first!). Here are some requirements to help guide your design:
-
-- Show more than one, but fewer than ~10 trends
-  - For example, two books, or 5 different mediums
-- You must have clear x and y axis labels
-- The chart needs a clear title 
-- You need a legend for your different line colors and a clear - legend title
-In your .Rmd file, make sure to describe why you included the chart, and what patterns emerged
-
-When we say "clear" or "human readable" titles and labels, that means that you should not just display the variable name.
-
-Here's an example of how to run an R script inside an RMarkdown file:
-
-``````{r, echo = FALSE, code = readLines("chart2_example.R")}
+```{r, echo = FALSE, warning = FALSE, message = FALSE}
+source("chart2.R")
+p2
 ```
 
 ### Your Choice
 
-The last chart is up to you. It could be a line plot, scatter plot, histogram, bar plot, stacked bar plot, and more. Here are some requirements to help guide your design:
+So I choose the third one as a pie chart to reveal the relation of total check outs and the time.  
+  
+Except the result of pandemic and digitizing on media and book, I also wonder if those two things has a effect on the number of people who come to the library. Unfortunately, the result shows that after quarantine, fewer people come library to borrow items. Percent after 2020 is increasing but slow. The area of 2017, 2018, and 2019 is clearly larger than 2020, 2021, and 2022. People now are less likely to search for items in library, even library itself also becomes digital and one can borrow items online. I think it is because pandemic force people to search books, music or maps on the Internet but instead of go to the library. Anyway, the trend of checkouts clearly decreased in recent three years and is likely to keep steady.
 
-- You must have clear x and y axis labels
-- The chart needs a clear title 
-- You need a legend for your different line colors and a clear legend title
-
-Here's an example of how to run an R script inside an RMarkdown file:
-
-``````{r, echo = FALSE, code = readLines("chart2_example.R")}
+```{r, echo = FALSE, warning = FALSE, message = FALSE}
+source("chart3.R")
+p3
 ```
 
 
